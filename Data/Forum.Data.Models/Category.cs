@@ -21,7 +21,6 @@ namespace Forum.Data.Models
         [MinLength(30)]
         public string Description { get; set; }
 
-        [Required]
         public string ImageUrl { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
