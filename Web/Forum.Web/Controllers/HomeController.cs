@@ -3,31 +3,28 @@
     using System.Diagnostics;
     using System.Linq;
     using Forum.Data;
+    using Forum.Data.Common.Repositories;
+    using Forum.Data.Models;
     using Forum.Web.ViewModels;
     using Forum.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
+    using Forum.Services.Mapping;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext db;
+        private readonly IDeletableEntityRepository<Category> categoriesRepository;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(IDeletableEntityRepository<Category> categoriesRepository)
         {
-            this.db = db;
+            this.categoriesRepository = categoriesRepository;
         }
 
         public IActionResult Index()
         {
             var viewModel = new IndexViewModel();
-            var categories = this.db.Categories.Select(x => new IndexCategoryViewModel
-            {
-                Name = x.Name,
-                Description = x.Description,
-                ImageUrl = x.ImageUrl,
-                Title = x.Title,
-
-
-            }).ToList();
+            var categories = this.categoriesRepository.All()
+                .To<IndexCategoryViewModel>()
+                .ToList();
             viewModel.Categories = categories;
             return this.View(viewModel);
         }
