@@ -9,22 +9,22 @@
     using Forum.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
     using Forum.Services.Mapping;
+    using Forum.Services.Data;
 
     public class HomeController : BaseController
     {
-        private readonly IDeletableEntityRepository<Category> categoriesRepository;
+        
+        private readonly ICategoriesService categoriesService;
 
-        public HomeController(IDeletableEntityRepository<Category> categoriesRepository)
+        public HomeController(ICategoriesService categoriesService)
         {
-            this.categoriesRepository = categoriesRepository;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult Index()
         {
             var viewModel = new IndexViewModel();
-            var categories = this.categoriesRepository.All()
-                .To<IndexCategoryViewModel>()
-                .ToList();
+            var categories = this.categoriesService.GetAll<IndexCategoryViewModel>();
             viewModel.Categories = categories;
             return this.View(viewModel);
         }
