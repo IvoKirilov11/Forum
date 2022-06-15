@@ -1,0 +1,22 @@
+﻿@model Forum.Web.ViewModels.Categories.CategoryViewModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}
+
+<h1 class="display-3">@Model.Title</h1>
+<div class="alert alert-info">
+    @Model.Description
+</div>
+
+@foreach (var post in Model.Posts)
+{
+   <div class="media-body">
+    		<h4 class="media-heading">@post.Title</h4>
+          <p class="text-right">@post.UserUserName</p>
+          <p></p>
+          <ul class="list-inline list-unstyled">
+  			<li class= "list-inline-item"><i class="glyphicon glyphicon-calendar"></i> @post.CreateOn </li>
+            <li class= "list-inline-item"><i class="glyphicon glyphicon-comment"></i> @post.CommentsCount</li>
+			</ul>
+   </div>
+}        
