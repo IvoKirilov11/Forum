@@ -12,11 +12,14 @@
 {
    <div class="media-body">
     		<h4 class="media-heading">@post.Title</h4>
-          <p class="text-right">@post.UserUserName</p>
-          <p></p>
-          <ul class="list-inline list-unstyled">
-  			<li class= "list-inline-item"><i class="glyphicon glyphicon-calendar"></i> @post.CreateOn </li>
+          <p class="text-right"> 
+              <ul class="list-inline list-unstyled">
+  			<li class= "list-inline-item"><i class="glyphicon glyphicon-user"></i> By @post.UserUserName </li>
+            <li class= "list-inline-item"><i class="glyphicon glyphicon-calendar"></i> @post.CreateOn </li>
             <li class= "list-inline-item"><i class="glyphicon glyphicon-comment"></i> @post.CommentsCount</li>
 			</ul>
+             </p>
+          <p></p>
+          
    </div>
 }        
