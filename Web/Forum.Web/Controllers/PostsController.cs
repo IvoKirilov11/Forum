@@ -1,5 +1,6 @@
 ﻿using Forum.Data.Common.Repositories;
 using Forum.Data.Models;
+using Forum.Services.Data;
 using Forum.Web.ViewModels.Posts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,11 +12,12 @@ namespace Forum.Web.Controllers
     public class PostsController : Controller
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
+        private readonly IPostsService postsService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PostsController(IDeletableEntityRepository<Post> postsRepository,UserManager<ApplicationUser> userManager)
+        public PostsController(IPostsService postsService,UserManager<ApplicationUser> userManager)
         {
-            this.postsRepository = postsRepository;
+            this.postsService = postsService;
             this.userManager = userManager;
         }
 
@@ -23,6 +25,7 @@ namespace Forum.Web.Controllers
         {
             return View();
         }
+
         [Authorize]
         public IActionResult Create()
         {
@@ -39,17 +42,8 @@ namespace Forum.Web.Controllers
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var post = new Post
-            {
-                CategoryId = input.CategoryId,
-                Content = input.Content,
-                Title = input.Title,
-                UserId = user.Id,
-            };
-            await this.postsRepository.AddAsync(post);
-            await this.postsRepository.SaveChangesAsync();
-
-            return this.RedirectToAction("ById", new {id = post.Id});
+            var postId = await this.postsService.CreateAsync(input.Title, input.Content, input.CategoryId, user.Id);
+            return this.RedirectToAction("ById", new { id = postId });
         }
     }
 }
