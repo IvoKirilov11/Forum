@@ -1,6 +1,8 @@
 ﻿using Forum.Data.Models;
 using Forum.Services.Mapping;
 using System;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Forum.Web.ViewModels.Categories
 {
@@ -12,8 +14,16 @@ namespace Forum.Web.ViewModels.Categories
 
         public string Content { get; set; }
 
-        public string ShortContent =>
-            this.Content?.Length > 50 ? this.Content?.Substring(0,50) + "..." : this.Content;
+        public string ShortContent
+        {
+            get
+            {
+                var content = WebUtility.HtmlDecode(Regex.Replace(this.Content, @"<[^>]+>", string.Empty));
+                return content.Length > 300
+                        ? content.Substring(0, 300) + "..."
+                        : content;
+            }
+        }
 
         public string UserUserName { get; set; }
 

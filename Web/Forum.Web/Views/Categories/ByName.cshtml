@@ -14,11 +14,16 @@
     		<h4 class="media-heading">@post.Title</h4>
             <p>@post.ShortContent</p>
               <ul class="list-inline list-unstyled text-right">
-  			<li class= "list-inline-item"><i class="fa-solid fa-user-pen"></i> By @post.UserUserName </li>
-            <li class= "list-inline-item"><i class="fa-solid fa-calendar-alt"></i> @post.CreateOn </li>
-            <li class= "list-inline-item"><i class="fa-solid fa-comment-dots"></i> @post.CommentsCount</li>
-			</ul>
-          
+            <li class="list-inline-item">
+                <i class="fas fa-user-edit"></i> @post.UserUserName
+            </li>
+            <li class="list-inline-item">
+                <i class="fas fa-calendar-alt"></i> @post.CreateOn
+            </li>
+            <li class="list-inline-item">
+                <i class="fas fa-comment-dots"></i> @post.CommentsCount comments
+            </li>
+        </ul>
           
    </div>
 }        
