@@ -13,11 +13,13 @@ namespace Forum.Web.Controllers
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly IPostsService postsService;
+        private readonly ICategoriesService categoriesService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PostsController(IPostsService postsService,UserManager<ApplicationUser> userManager)
+        public PostsController(IPostsService postsService, ICategoriesService categoriesService, UserManager<ApplicationUser> userManager)
         {
             this.postsService = postsService;
+            this.categoriesService = categoriesService;
             this.userManager = userManager;
         }
 
@@ -29,7 +31,12 @@ namespace Forum.Web.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            return this.View();
+            var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
+            var viewModel = new PostCreateInputModel
+            {
+                Categories = categories,
+            };
+            return this.View(viewModel);
         }
 
         [Authorize]
