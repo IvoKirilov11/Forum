@@ -20,6 +20,7 @@ namespace Forum.Data.Models
 
         public string UserId { get; set; }
 
+        [Required]
         public virtual ApplicationUser User { get; set; }
 
         public int CategoryId { get; set; }
