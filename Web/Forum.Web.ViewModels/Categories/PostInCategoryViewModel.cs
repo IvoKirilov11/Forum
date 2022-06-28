@@ -8,7 +8,9 @@ namespace Forum.Web.ViewModels.Categories
 {
     public class PostInCategoryViewModel : IMapFrom<Post>
     {
-        public DateTime CreateOn { get; set; }
+        public int Id { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public string Title { get; set; }
 
