@@ -26,12 +26,12 @@ namespace Forum.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> Post(VoteInputModel input)
+        public async Task<ActionResult<VotesResponseModel>> Post(VoteInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
             await this.votesService.VoteAsync(input.PostId,userId,input.IsUpVote);
             var votes = this.votesService.GetVotes(input.PostId);
-            return this.Ok();
+            return new VotesResponseModel { VotesCount = votes };
         }
     }
 }

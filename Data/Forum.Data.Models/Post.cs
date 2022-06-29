@@ -10,6 +10,7 @@ namespace Forum.Data.Models
         public Post()
         {
             this.Comments = new HashSet<Comment>();
+            this.Votes = new HashSet<Vote>();
         }
 
         [Required]
@@ -28,5 +29,7 @@ namespace Forum.Data.Models
         public virtual Category Category { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<Vote> Votes { get; set; }
     }
 }

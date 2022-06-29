@@ -51,7 +51,12 @@
                 options =>
                 {
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                }).AddRazorRuntimeCompilation();
+                });
+
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 

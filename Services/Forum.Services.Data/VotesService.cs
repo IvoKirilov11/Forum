@@ -26,7 +26,7 @@ namespace Forum.Services.Data
 
         public async Task VoteAsync(int postId, string userId, bool isUpVote)
         {
-            var vote = votesRepository.All().FirstOrDefault(x => x.PostId == postId && x.UserId == userId);
+            var vote = this.votesRepository.All().FirstOrDefault(x => x.PostId == postId && x.UserId == userId);
 
             if (vote != null)
             {
