@@ -3,6 +3,7 @@ using Forum.Data.Models;
 using Forum.Services.Mapping;
 using Ganss.XSS;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Forum.Web.ViewModels.Posts
@@ -22,6 +23,8 @@ namespace Forum.Web.ViewModels.Posts
         public string UserUserName { get; set; }
 
         public int VotesCount { get; set; }
+
+        public IEnumerable<PostCommentViewModel> Comments { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
