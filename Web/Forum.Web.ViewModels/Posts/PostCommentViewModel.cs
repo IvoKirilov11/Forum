@@ -1,9 +1,11 @@
-﻿using Ganss.XSS;
+﻿using Forum.Data.Models;
+using Forum.Services.Mapping;
+using Ganss.XSS;
 using System;
 
-namespace Forum.Web.ViewModels.Posts
+namespace Forum.Web.ViewModels.Posts 
 {
-    public class PostCommentViewModel
+    public class PostCommentViewModel : IMapFrom<Comment>
     {
         public int Id { get; set; }
 
