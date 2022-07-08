@@ -1,6 +1,7 @@
 ﻿using Forum.Data.Common.Repositories;
 using Forum.Data.Models;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Forum.Services.Data
@@ -30,7 +31,10 @@ namespace Forum.Services.Data
 
         public bool IsInPostId(int commentId, int postId)
         {
-            throw new NotImplementedException();
+            var commentPostId = this.commentsRepository.All().Where(x => x.Id == commentId)
+                .Select(x => x.PostId).FirstOrDefault();
+
+            return commentPostId == postId;
         }
     }
 }
